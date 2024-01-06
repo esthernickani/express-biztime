@@ -2,13 +2,24 @@
 
 
 const express = require("express");
+const bodyParser = require('body-parser')
 
 const app = express();
 const ExpressError = require("./expressError")
 
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended:true,
+  }),
+);
+
 const companyRoutes = require("./routes/companies")
+const invoiceRoutes = require("./routes/invoices")
 
 app.use('/companies', companyRoutes)
+app.use('/invoices', invoiceRoutes)
+
 app.use(express.json());
 
 
