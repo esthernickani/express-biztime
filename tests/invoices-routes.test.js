@@ -4,14 +4,11 @@ const request = require("supertest");
 const app = require('../app')
 const db = require('../db')
 
-beforeAll(async function() {
+beforeEach(async function() {
     await db.query(`INSERT into companies (code, name, description)
                     VALUES ($1, $2, $3)
                  `, ['testa', 'testnamea', 'testdescriptiona'])
-})
 
-
-beforeEach(async function() {
     await db.query(`INSERT into invoices (comp_code, amt)
                     VALUES ($1, $2)
                  `, ['testa', 10000])
@@ -19,6 +16,7 @@ beforeEach(async function() {
 
 afterEach(async function() {
     await db.query('DELETE from invoices')
+    await db.query('DELETE from companies')
 })
 
 afterAll(async function() {
