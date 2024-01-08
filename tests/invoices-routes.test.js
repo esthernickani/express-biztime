@@ -48,38 +48,15 @@ describe("POST /invoices", function() {
         });
 
         expect(resp.statusCode).toBe(201)
-        expect(resp.body).toEqual([{
-                "code": "testb",
-                "name": "testnameb",
-                "description": "testdescriptionb"
-            }
-        ])
+        expect(resp.body).toEqual({
+                "invoice": [{
+                    "add_date": expect.any(String), 
+                    "amt": 10000, 
+                    "comp_code": "testa", 
+                    "id": expect.any(Number), 
+                    "paid": false, 
+                    "paid_date": null
+            }]
+        })
     })
 })
-
-/*describe("PUT /companies/:code", function() {
-    test("Updates a single company", async function() {
-      const resp = await request(app)
-        .put(`/companies/testa`)
-        .send({
-          name: "changename2",
-          description: "change description"
-        });
-
-      expect(resp.statusCode).toBe(200);
-      expect(resp.body).toEqual({
-        "company": [
-            {
-                "code": "testa",
-                "name": "changename2",
-                "description": "change description"
-            }
-        ]
-    });
-    });
-  
-    test("Responds with 404 if company code invalid", async function() {
-      const resp = await request(app).put(`/companies/wrongname`);
-      expect(resp.statusCode).toBe(404);
-    });
-  });*/
