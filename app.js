@@ -16,9 +16,13 @@ app.use(
 
 const companyRoutes = require("./routes/companies")
 const invoiceRoutes = require("./routes/invoices")
+const industryRoutes = require("./routes/industries")
+const industryCompanyRoutes = require("./routes/industry_company")
 
 app.use('/companies', companyRoutes)
 app.use('/invoices', invoiceRoutes)
+app.use('/industries', industryRoutes)
+app.use('/industrycompany', industryCompanyRoutes)
 
 app.use(express.json());
 

@@ -1,0 +1,23 @@
+const express = require('express');
+const db = require('../db')
+const ExpressError = require('../expressError')
+const router = new express.Router();
+
+router.post("/", async function(req, res, next) {
+    try {
+        const { industry_code, company_code } = req.body
+        const results = await db.query(
+            `INSERT into industry_company (company_code, industry_code)
+             VALUES ($1, $2)
+             RETURNING company_code, industry_code`, 
+             [company_code, industry_code]);
+             return res.status(201).json({"Updated": results.rows})
+    } catch (err) {
+        console.log(err)
+        return next(err)
+    }
+})
+
+
+
+module.exports = router;
